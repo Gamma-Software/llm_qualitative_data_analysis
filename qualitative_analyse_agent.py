@@ -15,7 +15,7 @@ st.set_page_config(
     menu_items={
         'Get Help': 'mailto:valentin.rudloff.perso@gmail.com',
         'Report a bug': "https://github.com/Gamma-Software/llm_qualitative_data_analysis/issues",
-        'About': open("data/about.md", "r").read()
+        'About': open("README.md", "r").read()
     }
 )
 
@@ -53,7 +53,7 @@ with st.sidebar:
     st.markdown("Made with ❤️ by [Valentin Rudloff](https://www.linkedin.com/in/rudloffvalentin/)")
 
 if menu == "About":
-    st.markdown(open("data/about.md", "r").read())
+    st.markdown(open("README.md", "r").read())
     st.stop()
 
 st.title("Qualitative Analysis 📝 Agent")
