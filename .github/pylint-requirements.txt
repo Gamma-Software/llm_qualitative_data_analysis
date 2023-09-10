@@ -1,0 +1,8 @@
+pylint-quotes
+langchain
+structlog
+openai
+toml>=0.10.1, <2
+tiktoken
+streamlit
+python-dotenv
