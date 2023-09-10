@@ -1,0 +1,15 @@
+{
+    "version": "1.0.0",
+    "tasks": [
+        {
+            "label": "Push tag",
+            "type": "shell",
+            "command": "./scripts/push_tag.sh",
+            "group": "git",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
