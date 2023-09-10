@@ -2,11 +2,20 @@
 This is a tool to help you do your qualitative data analysis. 🧐
 This can for instance take your transcripts and generate codes and themes for you. 💡
 
-# Tech 🛠️
+# 🔬 Tech stack
 The Qualitative Data Analysis uses [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or Large Language Models to generate the summary / codes / themes and classify them. 🤖
+The application is developped with Python.
+
+## Python Libraries
 This tool is powered by libraries:
 - [Streamlit](https://streamlit.io): For the User Interface 🖥️
 - [Langchain](https://langchain.com): For creating LLMs applications 🔗
+
+## Diagram
+TODO Show a diagram with the interaction between libs
+
+## LLM chain
+TODO show the LLM Chaining
 
 # Features ✨
 - Upload your transcripts 📂
