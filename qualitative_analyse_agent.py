@@ -14,7 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
     menu_items={
         'Get Help': 'mailto:valentin.rudloff.perso@gmail.com',
-        'Report a bug': "https://valentin.pival.fr",
+        'Report a bug': "https://github.com/Gamma-Software/llm_qualitative_data_analysis/issues",
         'About': open("data/about.md", "r").read()
     }
 )
