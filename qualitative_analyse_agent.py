@@ -23,10 +23,14 @@ with st.sidebar:
     st.title("Getting started")
     menu = st.selectbox("Select pages", ["Raw data", "Qualitative Analysis", "About"], index=1)
 
-    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
-    if 'openai_api_key' not in st.session_state:
-        st.session_state['openai_api_key'] = openai_api_key
-    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+    if "openai_api_key" not in st.secrets or \
+        ("openai_api_key" in st.secrets and st.secrets["openai_api_key"] == "your key here"):
+        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+        if 'openai_api_key' not in st.session_state:
+            st.session_state['openai_api_key'] = openai_api_key
+        "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+    else:
+        st.session_state['openai_api_key'] = st.secrets["openai_api_key"]
 
     files = st.file_uploader("Upload your data", accept_multiple_files=True, type=['txt', 'md'])
 
