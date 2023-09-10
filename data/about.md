@@ -1,4 +1,4 @@
-# Qualitative Data Analysis 📝
+# About 📝
 This is a tool to help you do your qualitative data analysis. 🧐
 This can for instance take your transcripts and generate codes and themes for you. 💡
 

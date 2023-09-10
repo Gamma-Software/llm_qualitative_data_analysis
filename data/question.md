@@ -1,0 +1,1 @@
+How do students perceive the quality and accessibility of food services on campus, and what factors influence their dining choices and satisfaction?
