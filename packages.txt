@@ -1,0 +1,4 @@
+build-essential
+curl
+software-properties-common
+git
