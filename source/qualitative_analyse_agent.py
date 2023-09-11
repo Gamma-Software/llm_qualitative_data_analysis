@@ -1,8 +1,8 @@
 from io import StringIO
 
 import streamlit as st
-from lib.report import summary, codes, themes, parse_codes
-from lib.chains import summary_chain, overall_chain
+from modules.report import parse_codes
+from modules.chains import summary_chain, overall_chain
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -23,8 +23,9 @@ with st.sidebar:
     st.title("Getting started")
     menu = st.selectbox("Select pages", ["Raw data", "Qualitative Analysis", "About"], index=1)
 
-    if "openai_api_key" not in st.secrets or \
-        ("openai_api_key" in st.secrets and st.secrets["openai_api_key"] == "your key here"):
+    if ("openai_api_key" not in st.secrets or
+        "openai_api_key" in st.secrets and
+        st.secrets["openai_api_key"] == "your key here"):
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
         if 'openai_api_key' not in st.session_state:
             st.session_state['openai_api_key'] = openai_api_key
@@ -60,9 +61,22 @@ st.title("Qualitative Analysis 📝 Agent")
 st.caption("Using the power of LLMs")
 
 description_container = st.container()
-description_container.write("This is a tool to help you do your qualitative data analysis. This can for instance take your transcripts and generate codes and themes for you")
-description_container.markdown("To perfom the qualitative analysis, you will need to upload your transcripts and ask a research question. The tool will then generate:\n1. summary of the transcripts \n2. Identify excerts and generate codes\n3. Generate themes (by categorizing codes) based on the research question you asked.")
-description_container.markdown("Learn more about [Qualitative Analysis](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiB2pWUhZyBAxV2WqQEHRW-A54QFnoECCUQAw&url=https%3A%2F%2Fwww.investopedia.com%2Fterms%2Fq%2Fqualitativeanalysis.asp&usg=AOvVaw09Xoebi_k9lmD1zCFIS2Bn&opi=89978449)")
+description_container.write(
+    """This is a tool to help you do your qualitative data analysis.
+    This can for instance take your transcripts and generate codes
+    and themes for you""")
+description_container.markdown(
+    """To perfom the qualitative analysis, you will need to upload
+    your transcripts and ask a research question. The tool will
+    then generate:\n1. summary of the transcripts \n2. Identify
+    excerts and generate codes\n3. Generate themes (by categorizing
+    codes) based on the research question you asked.""")
+description_container.markdown(
+    """Learn more about [Qualitative Analysis](https://www.google.com
+    /url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=
+    2ahUKEwiB2pWUhZyBAxV2WqQEHRW-A54QFnoECCUQAw&url=https%3A%2F
+    %2Fwww.investopedia.com%2Fterms%2Fq%2Fqualitativeanalysis.
+    asp&usg=AOvVaw09Xoebi_k9lmD1zCFIS2Bn&opi=89978449)""")
 
 if not files:
     st.info("Please upload some qualitative data in the sidebar")
