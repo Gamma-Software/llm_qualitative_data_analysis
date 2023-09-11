@@ -29,7 +29,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Apply the version number
-sed -i "s/VERSION=\".*\"/VERSION=\"$version\"/" version.py
+sed -i "s/VERSION=\".*\"/VERSION=\"$version\"/" source/version.py
 git add version.py
 git commit -m "Bump version to $version"
 git push origin main
