@@ -72,11 +72,8 @@ description_container.markdown(
     excerts and generate codes\n3. Generate themes (by categorizing
     codes) based on the research question you asked.""")
 description_container.markdown(
-    """Learn more about [Qualitative Analysis](https://www.google.com
-    /url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=
-    2ahUKEwiB2pWUhZyBAxV2WqQEHRW-A54QFnoECCUQAw&url=https%3A%2F
-    %2Fwww.investopedia.com%2Fterms%2Fq%2Fqualitativeanalysis.
-    asp&usg=AOvVaw09Xoebi_k9lmD1zCFIS2Bn&opi=89978449)""")
+    """Learn more about
+    [Qualitative Analysis](https://www.investopedia.com/terms/q/qualitativeanalysis.asp)""")
 
 if not files:
     st.info("Please upload some qualitative data in the sidebar")
@@ -153,36 +150,44 @@ if menu == "Qualitative Analysis":
     if not question:
         st.info("Please enter a question to continue analysis...")
     elif st.button("🚄 Perform Qualitative Analysis"):
-        with st.spinner("Summarizing..."):
-            output = overall_chain()({"max_limit_summary": max_limit_summary_words,
-                                      "min_limit_codes": min_limit_codes,
-                                      "max_limit_codes": max_limit_codes,
-                                      "transcript": qualitative_docs_string,
-                                      "question": question}, return_only_outputs=True)
+        with st.status("Qualitative Analysis...", expanded=True) as status:
+            status_placeholder = st.container()
+            st.toast("Generate Summary/Code/Theme with AI...")
+            status_placeholder.write("Generate Summary/Code/Theme with AI...")
+            try:
+                output = overall_chain()({"max_limit_summary": max_limit_summary_words,
+                                          "min_limit_codes": min_limit_codes,
+                                          "max_limit_codes": max_limit_codes,
+                                          "transcript": qualitative_docs_string,
+                                          "question": question}, return_only_outputs=True)
+            except Exception:
+                status.update(label="Qualitative Analysis... Failed", state="error")
+
+            st.toast("Generating report 📝...")
+            status_placeholder.write("Generating report 📝...")
+
             generated_themes = output["themes"]
             generated_codes = output["codes"]
             generated_summary = output["summary_qa"]
             table = parse_codes(generated_codes, generated_themes)
 
-            # Save the output to a file
-            @st.cache
-            def convert_df(df):
-                # IMPORTANT: Cache the conversion to prevent computation on every rerun
-                return df.to_csv().encode('utf-8')
-
             # Overwrite file report
-            report = "Summary:\n"+generated_summary+"\n"+convert_df(table)
+            report = "Summary:\n"+generated_summary+"\n"+table.to_csv().encode('utf-8')
 
-    # --- Generating a report in a table form ---
-    if output:
-        st.header("Analysis report 📈")
-        st.subheader("Summary")
-        st.caption(generated_summary)
-        st.subheader("Table")
-        st.table(table)
-        st.download_button(
-            label="Download the report",
-            data=report,
-            file_name='report.txt',
-            mime='text/plain',
-        )
+            # --- Generating a report in a table form ---
+            if output:
+                st.header("Analysis report 📈")
+                st.subheader("Summary")
+                st.caption(generated_summary)
+                st.subheader("Table")
+                st.table(table)
+                st.download_button(
+                    label="Download the report",
+                    data=report,
+                    file_name='report.txt',
+                    mime='text/plain',
+                )
+
+            status_placeholder = st.empty()
+            status.update(label="Qualitative Analysis complete!", state="complete")
+
