@@ -33,9 +33,11 @@ def summary_qa_chain(llm):
 
 
 def generate_codes_chain(llm):
-    prompt_codes = """Review the given transcript to identify relevant excerpts that address the research question.
+    prompt_codes = """Review the given transcripts to identify relevant excerpts that address the research question.
     Generate between {min_limit_codes} and {max_limit_codes} phrases (or codes) that best represent the excerpts identified. Each code must be between two to five words long.
+    <format_instructions>
     {format_instructions}
+    </format_instructions>
 
     <transcript>
     {transcript}
@@ -56,7 +58,11 @@ def generate_codes_chain(llm):
 
 def generate_themes_chain(llm):
     prompt_themes = """Based on the summary you generated, develop 5 or 6 themes by categorizing the codes and addressing the research question.
-    Each themes must in between 5 to 6 words long. {format_instructions}
+    Each themes must in between 5 to 6 words long.
+
+    <format_instructions>
+    {format_instructions}
+    </format_instructions>
 
     <code>
     {codes}
