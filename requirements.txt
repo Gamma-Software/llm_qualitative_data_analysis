@@ -2,4 +2,3 @@ streamlit
 openai
 langchain
 pandas
-python-dotenv

@@ -1,12 +1,18 @@
+import os
 from io import StringIO
 import time
 
 import streamlit as st
-from modules.report import parse_codes
-from modules.chains import summary_chain, overall_chain
 
-from dotenv import load_dotenv
-load_dotenv()
+# Setup langsmith variables
+os.environ['LANGCHAIN_TRACING_V2'] = st.secrets["langsmith"]["tracing"]
+os.environ['LANGCHAIN_ENDPOINT'] = st.secrets["langsmith"]["api_url"]
+os.environ['LANGCHAIN_API_KEY'] = st.secrets["langsmith"]["api_key"]
+os.environ['LANGCHAIN_PROJECT'] = st.secrets["langsmith"]["project"]
+
+from modules.report import parse_codes  # noqa: E402
+from modules.chains import summary_chain, overall_chain  # noqa: E402
+
 
 st.set_page_config(
     page_title="Qualitative Data Analysis",
@@ -28,7 +34,7 @@ with st.sidebar:
         "openai_api_key" in st.secrets and
         st.secrets["openai_api_key"] == "your key here"):
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
-        if 'openai_api_key' not in st.session_state:
+        if openai_api_key and 'openai_api_key' not in st.session_state:
             st.session_state['openai_api_key'] = openai_api_key
         "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
     else:

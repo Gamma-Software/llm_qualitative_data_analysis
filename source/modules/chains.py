@@ -5,7 +5,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.chains import SequentialChain
 
-from modules.output_parsers import code_parser, theme_parser
+from modules.output_parsers import theme_parser
 
 
 # --- Summarizing qualitative data ---
@@ -88,10 +88,33 @@ def generate_themes_chain(llm):
     </question>
 
     themes:"""
+
+    format = """respect the following format:
+    ```json
+    {
+        "themes": [
+            {
+                "theme": "Theme 1",
+                "code": [
+                    "code1 of theme 1 category",
+                    "code2 of theme 1 category"
+                ]
+            },
+            {
+                "theme": "Theme 2",
+                "code": [
+                    "code1 of theme 2 category",
+                    "code2 of theme 2 category"
+                ]
+            },
+            ...
+    }
+    ```
+    """
     extract_themes_prompt_template = PromptTemplate(
         input_variables=["codes", "summary_qa", "question"],
         template=prompt_themes,
-        partial_variables={"format_instructions": theme_parser.get_format_instructions()},)
+        partial_variables={"format_instructions": format},)
     return LLMChain(llm=llm, prompt=extract_themes_prompt_template, output_key="themes")
 
 
