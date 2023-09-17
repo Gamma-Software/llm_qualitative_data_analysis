@@ -1,4 +1,5 @@
 from io import StringIO
+import time
 
 import streamlit as st
 from modules.report import parse_codes
@@ -151,15 +152,17 @@ if menu == "Qualitative Analysis":
         st.info("Please enter a question to continue analysis...")
     elif st.button("🚄 Perform Qualitative Analysis"):
         with st.status("Qualitative Analysis...", expanded=True) as status:
+            time_start = time.time()
             status_placeholder = st.container()
             st.toast("Generate Summary/Code/Theme with AI...")
             status_placeholder.write("Generate Summary/Code/Theme with AI...")
+            output = overall_chain()({"max_limit_summary": max_limit_summary_words,
+                                      "min_limit_codes": min_limit_codes,
+                                      "max_limit_codes": max_limit_codes,
+                                      "transcript": qualitative_docs_string,
+                                      "question": question}, return_only_outputs=True)
             try:
-                output = overall_chain()({"max_limit_summary": max_limit_summary_words,
-                                          "min_limit_codes": min_limit_codes,
-                                          "max_limit_codes": max_limit_codes,
-                                          "transcript": qualitative_docs_string,
-                                          "question": question}, return_only_outputs=True)
+                pass
             except Exception:
                 status.update(label="Qualitative Analysis... Failed", state="error")
 
@@ -170,9 +173,10 @@ if menu == "Qualitative Analysis":
             generated_codes = output["codes"]
             generated_summary = output["summary_qa"]
             table = parse_codes(generated_codes, generated_themes)
+            report = "Summary:\n"+generated_summary+f"\n{table.to_csv().encode('utf-8')}"
 
-            # Overwrite file report
-            report = "Summary:\n"+generated_summary+"\n"+table.to_csv().encode('utf-8')
+            time_elapsed = time.time() - time_start
+            st.caption(f"Generation took: {time_elapsed:.2f}s")
 
             # --- Generating a report in a table form ---
             if output:
@@ -190,4 +194,3 @@ if menu == "Qualitative Analysis":
 
             status_placeholder = st.empty()
             status.update(label="Qualitative Analysis complete!", state="complete")
-

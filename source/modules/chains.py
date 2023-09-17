@@ -37,6 +37,7 @@ def generate_codes_chain(llm):
     Generate between {min_limit_codes} and {max_limit_codes} phrases (or codes) that best represent the excerpts identified. Each code must be between two to five words long.
     <format_instructions>
     {format_instructions}
+    Where code1 and code2 are the codes you generated and excerpt1 and excerpt2 are the excerpts that support the code.
     </format_instructions>
 
     <transcript>
@@ -49,10 +50,20 @@ def generate_codes_chain(llm):
 
     codes:"""
 
+    format = """respect the following format:
+    ```json
+    {
+        "code1": "excerpt1",
+        "code2": "excerpt2",
+        ...
+    }
+    ```
+    """
+
     extract_code_prompt_template = PromptTemplate(
-        input_variables=["min_limit_codes", "max_limit_codes", "transcript", "question"],
+        input_variables=["min_limit_codes", "max_limit_codes", "transcript", "question", ],
         template=prompt_codes,
-        partial_variables={"format_instructions": code_parser.get_format_instructions()},)
+        partial_variables={"format_instructions": format})
     return LLMChain(llm=llm, prompt=extract_code_prompt_template, output_key="codes")
 
 

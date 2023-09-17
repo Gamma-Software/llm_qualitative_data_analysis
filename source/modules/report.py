@@ -1,8 +1,8 @@
 import json
 import pandas as pd
-import streamlit as st
 
-summary="""
+
+summary = """
 Based on the two transcripts, students have mixed perceptions of the quality and accessibility of food services on campus. While some aspects are appreciated, there is room for improvement. The affordability of food is a concern for students on a tight budget, as some options can be expensive. The variety and diversity of food options are generally decent, but students would like to see more international and culturally diverse choices.
 
 Students have different dietary restrictions and preferences, such as being vegetarian or trying to eat healthy. The college does offer some accommodations, but there is a desire for more variety in vegetarian and healthy options.
@@ -16,33 +16,27 @@ There are some sustainability initiatives in place, such as recycling bins and c
 Overall, students have varying levels of satisfaction with the food services on campus. Factors such as affordability, variety, dietary accommodations, and responsiveness to feedback influence their perceptions and dining choices. Students would like to see improvements in vegetarian options, affordability, transparency in pricing, and regular updates on changes or improvements planned for the future.
 """
 
-
-codes="""
-[
-  {"excerpt": "overall experience mixed", "code": "experience_mixed"},
-  {"excerpt": "favorite dishes chicken Alfredo pasta", "code": "favorite_dishes"},
-  {"excerpt": "college accommodate dietary restrictions", "code": "accommodate_restrictions"},
-  {"excerpt": "affordability of food challenging", "code": "affordability_challenging"},
-  {"excerpt": "beneficial weekly meal plan", "code": "beneficial_meal_plan"},
-  {"excerpt": "variety and diversity of food options", "code": "variety_diversity_options"},
-  {"excerpt": "improvements based on student feedback", "code": "improvements_feedback"},
-  {"excerpt": "sustainability initiatives recycling bins", "code": "sustainability_initiatives"},
-  {"excerpt": "food delivery services off-campus", "code": "food_delivery_off_campus"},
-  {"excerpt": "recommendations improving vegetarian options", "code": "improving_vegetarian_options"},
-  {"excerpt": "overall experience decent", "code": "experience_decent"},
-  {"excerpt": "favorite dishes classic cheeseburger", "code": "favorite_dishes"},
-  {"excerpt": "college accommodate healthy options", "code": "accommodate_healthy_options"},
-  {"excerpt": "affordability of food mixed bag", "code": "affordability_mixed_bag"},
-  {"excerpt": "beneficial pay-as-you-go option", "code": "beneficial_pay_as_you_go"},
-  {"excerpt": "variety and diversity of food options", "code": "variety_diversity_options"},
-  {"excerpt": "improvements based on student feedback", "code": "improvements_feedback"},
-  {"excerpt": "sustainability initiatives reusable trays", "code": "sustainability_initiatives"},
-  {"excerpt": "food delivery services off-campus", "code": "food_delivery_off_campus"},
-  {"excerpt": "recommendations broader range healthy options", "code": "broader_range_healthy_options"}
-]
+codes = """
+{
+    "experience_mixed": "overall experience mixed",
+    "favorite_dishes": "favorite dishes chicken Alfredo pasta",
+    "accommodate_restrictions": "college accommodate dietary restrictions",
+    "affordability_challenging": "affordability of food challenging",
+    "beneficial_meal_plan": "beneficial weekly meal plan",
+    "variety_diversity_options": "variety and diversity of food options",
+    "improvements_feedback": "improvements based on student feedback",
+    "sustainability_initiatives": "sustainability initiatives recycling bins",
+    "food_delivery_off_campus": "food delivery services off-campus",
+    "improving_vegetarian_options": "recommendations improving vegetarian options",
+    "experience_decent": "overall experience decent",
+    "accommodate_healthy_options": "college accommodate healthy options",
+    "affordability_mixed_bag": "affordability of food mixed bag",
+    "beneficial_pay_as_you_go": "beneficial pay-as-you-go option",
+    "broader_range_healthy_options": "recommendations broader range healthy options"
+}
 """
 
-themes="""
+themes = """
 {
   "themes": [
     {
@@ -165,9 +159,9 @@ def parse_codes(_codes, _themes):
         cleaned_data_dict["Codes"].append(code)
         excerpts_combined = []
         for c in codes:
-            for item in json1_data:
-                if c == item["code"]:
-                    excerpts_combined.append(item["excerpt"])
+            # Search for code in keys of json1_data
+            if c in json1_data.keys():
+                excerpts_combined.append(json1_data[c])
         excerpts_combined = set(excerpts_combined)
         cleaned_data_dict["Excerpts from transcript"].append(", ".join(excerpts_combined))
 
