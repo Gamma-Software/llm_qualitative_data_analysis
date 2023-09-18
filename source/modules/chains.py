@@ -55,7 +55,14 @@ def generate_codes_chain(llm):
     {
         "code1": "excerpt1",
         "code2": "excerpt2",
-        ...
+        ... (repeat for each code)
+    }
+    ```
+    Example:
+    ```json
+    {
+        "beneficial_pay_as_you_go": "beneficial pay-as-you-go option",
+        "broader_range_healthy_options": "recommendations broader range healthy options",
     }
     ```
     """
@@ -107,7 +114,28 @@ def generate_themes_chain(llm):
                     "code2 of theme 2 category"
                 ]
             },
-            ...
+            ... (repeat for each theme)
+    }
+    ```
+    Example:
+    ```json
+    {
+        "themes": [
+            {
+                "theme": "Dining Choices",
+                "code": [
+                    "beneficial_meal_plan",
+                    "beneficial_pay_as_you_go"
+                ]
+            },
+            {
+                "theme": "Vegetarian Options",
+                "code": [
+                    "improving_vegetarian_options",
+                    "broader_range_healthy_options"
+                ]
+            }
+        ]
     }
     ```
     """
