@@ -204,5 +204,3 @@ if all([key in st.session_state for key in ["report", "generated_summary", "tabl
         file_name='report.md',
         mime='text/markdown',
     )
-
-

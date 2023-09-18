@@ -85,6 +85,7 @@ def generate_themes_chain(llm):
     <code>
     {codes}
     </code>
+    {format_codes}
 
     <summary>
     {summary_qa}
@@ -139,10 +140,21 @@ def generate_themes_chain(llm):
     }
     ```
     """
+
+    format_codes = """
+    The code format above is:
+    ```json
+    {
+        "code1": "excerpt1",
+        "code2": "excerpt2",
+        ... (repeat for each code)
+    }
+    ```
+    """
     extract_themes_prompt_template = PromptTemplate(
         input_variables=["codes", "summary_qa", "question"],
         template=prompt_themes,
-        partial_variables={"format_instructions": format},)
+        partial_variables={"format_instructions": format, "format_codes": format_codes})
     return LLMChain(llm=llm, prompt=extract_themes_prompt_template, output_key="themes")
 
 
