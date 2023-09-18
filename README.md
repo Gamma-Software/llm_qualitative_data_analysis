@@ -41,5 +41,8 @@ For my wife's memoire, she needed a tool to help her do a Qualitative Data Analy
 LLMs are really good at understanding human semantics and thus perform a Qualitative Data Analysis. 🧠
 This application helped her get almost an instant result, and I'm pretty sure this can help you as well. 👍
 
+# Acknowledgements 🙏
+The application and the LLM prompt are greatly inspired by Dr. [Philip Adu, Ph.D](https://www.drphilipadu.com) video [Master Qualitative Data Analysis with ChatGPT: An 18-Minute Guide](https://www.youtube.com/watch?v=L1WelrcgLGM).
+
 Made with ❤️ by [Valentin Rudloff](https://www.linkedin.com/in/rudloffvalentin/)
 If you want to help me create other stuff like this you can [buy me ☕](https://www.buymeacoffee.com/valentinrudloff)
