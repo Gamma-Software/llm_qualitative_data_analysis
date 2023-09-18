@@ -175,28 +175,34 @@ if menu == "Qualitative Analysis":
             st.toast("Generating report 📝...")
             status_placeholder.write("Generating report 📝...")
 
-            generated_themes = output["themes"]
-            generated_codes = output["codes"]
-            generated_summary = output["summary_qa"]
-            table = parse_codes(generated_codes, generated_themes)
-            report = "Summary:\n"+generated_summary+f"\n{table.to_csv().encode('utf-8')}"
+            st.session_state["generated_themes"] = output["themes"]
+            st.session_state["generated_codes"] = output["codes"]
+            st.session_state["generated_summary"] = output["summary_qa"]
+            st.session_state["table"] = parse_codes(st.session_state["generated_codes"], st.session_state["generated_themes"])
+            msg = ""
+            for i, row in st.session_state["table"].iterrows():
+                msg += "\n## "+row["Theme"]
+                sub_code = row["Codes"].split(",")
+                sub_exc = row["Excerpts from transcript"].split(",")
+                for i, _ in enumerate(sub_code):
+                    msg += "\n- "+sub_code[i]+" -> *\""+sub_exc[i]+"\"*"
+            st.session_state["report"] = "# Summary\n"+st.session_state["generated_summary"]+f"\n\n# Result of Analysis\n{msg}"
 
             time_elapsed = time.time() - time_start
             st.caption(f"Generation took: {time_elapsed:.2f}s")
 
             # --- Generating a report in a table form ---
-            if output:
-                st.header("Analysis report 📈")
-                st.subheader("Summary")
-                st.caption(generated_summary)
-                st.subheader("Table")
-                st.table(table)
-                st.download_button(
-                    label="Download the report",
-                    data=report,
-                    file_name='report.txt',
-                    mime='text/plain',
-                )
-
             status_placeholder = st.empty()
             status.update(label="Qualitative Analysis complete!", state="complete")
+
+if all([key in st.session_state for key in ["report", "generated_summary", "table"]]):
+    st.header("Analysis report 📈")
+    st.markdown(st.session_state["report"])
+    st.download_button(
+        label="Download the report",
+        data=st.session_state["report"],
+        file_name='report.md',
+        mime='text/markdown',
+    )
+
+
