@@ -18,91 +18,105 @@ Overall, students have varying levels of satisfaction with the food services on 
 
 codes = """
 {
-    "experience_mixed": "overall experience mixed",
-    "favorite_dishes": "favorite dishes chicken Alfredo pasta",
-    "accommodate_restrictions": "college accommodate dietary restrictions",
-    "affordability_challenging": "affordability of food challenging",
-    "beneficial_meal_plan": "beneficial weekly meal plan",
-    "variety_diversity_options": "variety and diversity of food options",
-    "improvements_feedback": "improvements based on student feedback",
-    "sustainability_initiatives": "sustainability initiatives recycling bins",
-    "food_delivery_off_campus": "food delivery services off-campus",
-    "improving_vegetarian_options": "recommendations improving vegetarian options",
-    "experience_decent": "overall experience decent",
-    "accommodate_healthy_options": "college accommodate healthy options",
-    "affordability_mixed_bag": "affordability of food mixed bag",
-    "beneficial_pay_as_you_go": "beneficial pay-as-you-go option",
-    "broader_range_healthy_options": "recommendations broader range healthy options"
+  "open_conversations_about_differences": "people talk about their differences",
+  "differences_in_major_and_sorority": "two different worlds within major and sorority",
+  "racism_common_in_sorority": "people think racism is common in sorority",
+  "discussions_about_racism_in_classes": "talking about realities of racism in classes",
+  "need_to_seek_out_spaces": "need to seek out spaces to talk about race",
+  "limited_spaces_for_race_discussions": "some spaces are not open to race discussions",
+  "racial_consciousness_in_classes": "racial consciousness in Chicano Studies",
+  "friendship_facilitates_dialogue": "friendship facilitates dialogue about difference",
+  "ignorant_viewpoints_on_race": "encountering ignorant viewpoints on race",
+  "uncomfortable_discussions_about_race": "uncomfortable discussions about race",
+  "discussions_in_student_government": "discussions about race in student government",
+  "facilitating_dialogue_with_empathy": "facilitating dialogue with empathy",
+  "taboos_prevent_dialogue": "societal taboos prevent dialogue",
+  "uncomfortable_talking_about_sexuality": "uncomfortable discussing sexuality with ex-girlfriend",
+  "smaller_things_trigger_inhibition": "smaller things inhibit comfortable conversations",
+  "conversations_in_dorms_and_jobs": "conversations in dorms and workplace",
+  "comfortable_talking_about_differences": "comfortable talking about differences at work",
+  "limited_connections_outside_dorm": "less connected to UCLA outside of dorm",
+  "conversations_in_classes_and_clubs": "conversations in classes and clubs",
+  "embarrassment_and_fear_prevent_dialogue": "embarrassment and fear prevent dialogue",
+  "honesty_in_discussions_about_differences": "honesty in discussions about differences",
+  "interactions_in_clubs_and_organizations": "interactions in clubs and organizations",
+  "pride_in_sharing_culture": "pride in sharing Armenian culture"
 }
 """
 
 themes = """
 {
-  "themes": [
-    {
-      "theme": "Mixed Perceptions",
-      "code": [
-        "experience_mixed",
-        "experience_decent"
-      ]
-    },
-    {
-      "theme": "Affordability Concerns",
-      "code": [
-        "affordability_challenging",
-        "affordability_mixed_bag"
-      ]
-    },
-    {
-      "theme": "Variety and Diversity",
-      "code": [
-        "variety_diversity_options",
-        "variety_diversity_options"
-      ]
-    },
-    {
-      "theme": "Dietary Accommodations",
-      "code": [
-        "accommodate_restrictions",
-        "accommodate_healthy_options"
-      ]
-    },
-    {
-      "theme": "Dining Choices",
-      "code": [
-        "beneficial_meal_plan",
-        "beneficial_pay_as_you_go"
-      ]
-    },
-    {
-      "theme": "Feedback and Improvements",
-      "code": [
-        "improvements_feedback",
-        "improvements_feedback"
-      ]
-    },
-    {
-      "theme": "Sustainability Initiatives",
-      "code": [
-        "sustainability_initiatives",
-        "sustainability_initiatives"
-      ]
-    },
-    {
-      "theme": "Off-Campus Options",
-      "code": [
-        "food_delivery_off_campus",
-        "food_delivery_off_campus"
-      ]
-    },
-    {
-      "theme": "Vegetarian Options",
-      "code": [
-        "improving_vegetarian_options",
-        "broader_range_healthy_options"
-      ]
-    }
-  ]
+    "themes": [
+        {
+            "theme": "Frequency of Conversations",
+            "code": [
+                "open_conversations_about_differences",
+                "differences_in_major_and_sorority",
+                "racism_common_in_sorority",
+                "discussions_about_racism_in_classes",
+                "need_to_seek_out_spaces",
+                "limited_spaces_for_race_discussions",
+                "racial_consciousness_in_classes",
+                "friendship_facilitates_dialogue",
+                "ignorant_viewpoints_on_race",
+                "uncomfortable_discussions_about_race",
+                "discussions_in_student_government",
+                "facilitating_dialogue_with_empathy",
+                "taboos_prevent_dialogue",
+                "uncomfortable_talking_about_sexuality",
+                "smaller_things_trigger_inhibition",
+                "conversations_in_dorms_and_jobs",
+                "comfortable_talking_about_differences",
+                "limited_connections_outside_dorm",
+                "conversations_in_classes_and_clubs",
+                "embarrassment_and_fear_prevent_dialogue",
+                "honesty_in_discussions_about_differences",
+                "interactions_in_clubs_and_organizations",
+                "pride_in_sharing_culture"
+            ]
+        },
+        {
+            "theme": "Context of Conversations",
+            "code": [
+                "differences_in_major_and_sorority",
+                "racism_common_in_sorority",
+                "discussions_about_racism_in_classes",
+                "limited_spaces_for_race_discussions",
+                "racial_consciousness_in_classes",
+                "conversations_in_dorms_and_jobs",
+                "limited_connections_outside_dorm",
+                "conversations_in_classes_and_clubs",
+                "interactions_in_clubs_and_organizations"
+            ]
+        },
+        {
+            "theme": "Desire for More Conversations",
+            "code": [
+                "need_to_seek_out_spaces",
+                "discussions_in_student_government",
+                "facilitating_dialogue_with_empathy",
+                "taboos_prevent_dialogue",
+                "embarrassment_and_fear_prevent_dialogue"
+            ]
+        },
+        {
+            "theme": "Depth of Conversations",
+            "code": [
+                "discussions_about_racism_in_classes",
+                "racial_consciousness_in_classes",
+                "facilitating_dialogue_with_empathy",
+                "honesty_in_discussions_about_differences"
+            ]
+        },
+        {
+            "theme": "Improvement in Conversations",
+            "code": [
+                "uncomfortable_discussions_about_race",
+                "taboos_prevent_dialogue",
+                "embarrassment_and_fear_prevent_dialogue"
+            ]
+        }
+    ]
 }
 """
 
