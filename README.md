@@ -1,6 +1,6 @@
 # Qualitative Data Analysis 📝
 This is a tool to help you do your qualitative data analysis. 🧐
-This can for instance take your transcripts and generate codes and themes for you. 💡
+This can for instance take your transcripts and generate codes and themes for you 💡. It summarizes your data and can help you get insights on your data. 📊
 
 # 🔬 Tech stack
 The Qualitative Data Analysis uses [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or Large Language Models to generate the summary / codes / themes and classify them. 🤖
@@ -10,8 +10,60 @@ The application is developped with Python.
 This tool is powered by libraries:
 - [Streamlit](https://streamlit.io): For the User Interface 🖥️
 - [Langchain](https://langchain.com): For creating LLMs applications 🔗
+- [OpenAI](https://openai.com): The LLMs provider. For now we only integrated this LLM.
 
-## Diagram
+# Getting started 🏁
+
+## Requirements
+
+You need to have [Python](https://www.python.org/downloads/) installed on your computer.
+Choose the latest version of Python 3. 🐍. The version tested is 3.8.10.
+
+## Configuration
+
+Rename the `.streamlit/secrets_template.toml` file to `.streamlit/secrets.toml` and edit it to add your own configuration about langchain, langsmith and openai api key.
+
+## Installation
+
+Clone the repository and install the dependencies:
+
+```bash
+git clone
+cd qualitative-data-analysis
+pip install -r requirements.txt
+```
+
+## Run the application
+
+```bash
+streamlit run source/qualitative_analyse_agent.py
+```
+
+# Usage 📖
+
+The usage is pretty simple. 🤓
+
+1. Upload your transcripts: You can upload your transcripts from the sidebar 📂.
+    - Generate transcripts summary: In the Raw data section, you can generate a summary of your data individually.
+2. Enter your research question: You can enter your research question. This will be used to generate codes and themes. ❓
+3. Generate codes and themes: You can now click on the button to generate codes and themes. This will generate codes and themes based on your research question. 💡
+
+# Langsmith integration 🔗
+
+You can use langsmith to monitor your application and get insights on how it is used. 📊
+
+Edit the `.streamlit/secrets.toml` file and add the following lines:
+
+```toml
+[langsmith]
+tracing = true
+api_url = "https://api.smith.langchain.com"
+api_key = "your key here"
+project = "your project here"
+```
+
+# Diagrams
+## Libs
 TODO Show a diagram with the interaction between libs
 
 ## LLM chain
