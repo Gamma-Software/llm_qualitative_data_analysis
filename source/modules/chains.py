@@ -1,6 +1,6 @@
 import streamlit as st
 
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.chains import SequentialChain
@@ -14,8 +14,9 @@ def summary_chain(llm):
     summary_template = """Summarize the transcript in {max_limit_summary} words.
     transcript: {transcript}
     summary:"""
-    summary_prompt_template = PromptTemplate(input_variables=["max_limit_summary", "transcript"],
-                                             template=summary_template)
+    summary_prompt_template = PromptTemplate(
+        input_variables=["max_limit_summary", "transcript"], template=summary_template
+    )
     return LLMChain(llm=llm, prompt=summary_prompt_template, output_key="summary")
 
 
@@ -25,10 +26,10 @@ def summary_qa_chain(llm):
     transcript: {transcript}
     question: {question}
     summary_qa:"""
-    summary_qa_prompt_template = PromptTemplate(input_variables=["max_limit_summary",
-                                                                 "transcript",
-                                                                 "question"],
-                                                template=summary_qa_template)
+    summary_qa_prompt_template = PromptTemplate(
+        input_variables=["max_limit_summary", "transcript", "question"],
+        template=summary_qa_template,
+    )
     return LLMChain(llm=llm, prompt=summary_qa_prompt_template, output_key="summary_qa")
 
 
@@ -68,9 +69,15 @@ def generate_codes_chain(llm):
     """
 
     extract_code_prompt_template = PromptTemplate(
-        input_variables=["min_limit_codes", "max_limit_codes", "transcript", "question", ],
+        input_variables=[
+            "min_limit_codes",
+            "max_limit_codes",
+            "transcript",
+            "question",
+        ],
         template=prompt_codes,
-        partial_variables={"format_instructions": format})
+        partial_variables={"format_instructions": format},
+    )
     return LLMChain(llm=llm, prompt=extract_code_prompt_template, output_key="codes")
 
 
@@ -154,21 +161,36 @@ def generate_themes_chain(llm):
     extract_themes_prompt_template = PromptTemplate(
         input_variables=["codes", "summary_qa", "question"],
         template=prompt_themes,
-        partial_variables={"format_instructions": format, "format_codes": format_codes})
+        partial_variables={"format_instructions": format, "format_codes": format_codes},
+    )
     return LLMChain(llm=llm, prompt=extract_themes_prompt_template, output_key="themes")
 
 
 def overall_chain():
-    llm = ChatOpenAI(temperature=0,
-                     model_name="gpt-3.5-turbo-16k",
-                     openai_api_key=st.session_state['openai_api_key'])
-    llm2 = ChatOpenAI(temperature=0.5,
-                      model_name="gpt-3.5-turbo-16k",
-                      openai_api_key=st.session_state['openai_api_key'])
+    llm = ChatOpenAI(
+        temperature=0,
+        model_name="gpt-3.5-turbo-16k",
+        openai_api_key=st.session_state["openai_api_key"],
+    )
+    llm2 = ChatOpenAI(
+        temperature=0.5,
+        model_name="gpt-3.5-turbo-16k",
+        openai_api_key=st.session_state["openai_api_key"],
+    )
 
     return SequentialChain(
-        chains=[summary_qa_chain(llm), generate_codes_chain(llm2), generate_themes_chain(llm2)],
-        input_variables=["max_limit_summary", "min_limit_codes", "max_limit_codes",
-                         "transcript", "question"],
+        chains=[
+            summary_qa_chain(llm),
+            generate_codes_chain(llm2),
+            generate_themes_chain(llm2),
+        ],
+        input_variables=[
+            "max_limit_summary",
+            "min_limit_codes",
+            "max_limit_codes",
+            "transcript",
+            "question",
+        ],
         output_variables=["summary_qa", "codes", "themes"],
-        verbose=True)
+        verbose=True,
+    )
