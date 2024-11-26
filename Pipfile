@@ -9,6 +9,7 @@ openai = "*"
 langchain = ">=0.3.0"
 pandas = "*"
 langchain-openai = "*"
+langchain-community = "*"
 
 [dev-packages]
 
