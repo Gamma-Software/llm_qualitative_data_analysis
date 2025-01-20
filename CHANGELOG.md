@@ -5,12 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.2.0] - 2025-01-20
 
+- Add a script to get started
+- Add a secrets.toml file to store your OpenAI API key
+- Fix getting-started.sh script
+- Add requirements.txt file
 
 ## [0.1.0] - 2023-09-10
 
-First version of the Qualitative Analysis Data tool. 
+First version of the Qualitative Analysis Data tool.
 
 ### Added
 

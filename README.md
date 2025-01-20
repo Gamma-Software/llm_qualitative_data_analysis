@@ -30,8 +30,10 @@ Clone the repository and install the dependencies:
 ```bash
 git clone
 cd qualitative-data-analysis
-pip install -r requirements.txt
+sudo ./scripts/getting_started.sh
 ```
+
+The getting_started.sh script will ask you for your OpenAI API key and will create the secrets.toml file for you.
 
 ## Run the application
 
